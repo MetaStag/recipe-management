@@ -1,23 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import Faq from './components/Faq.js'
+import Browse from './components/Browse.js';
+import Add from './components/Add.js';
 
-function App() {
+import { useState } from "react";
+
+const App = () => {
+  const [option, setOption] = useState(0)
+
+  const handleClick = (n) => {
+    setOption(n)
+  }
+
+  let displayComponent;
+  switch (option) {
+    case 0:
+      displayComponent = <Browse />
+      break
+    case 1:
+      displayComponent = <Add />
+      break
+    case 2:
+      displayComponent = <Faq />
+      break
+    default:
+      displayComponent = <p>Error!</p>
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div className="bg-[#98724FE0] h-16 flex justify-between">
+            <p className="text-2xl p-3 mr-auto">Btech Recipe Wala</p>
+            <p className="text-lg p-3" onClick={()=>handleClick(0)}>Browse</p>
+            <p className="text-lg p-3" onClick={()=>handleClick(1)}>Add Recipe</p>
+            <p className="text-lg p-3" onClick={()=>handleClick(2)}>FAQ</p>
+        </div>
+        {displayComponent}
     </div>
   );
 }
